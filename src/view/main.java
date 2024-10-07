@@ -1,19 +1,30 @@
 package view;
-import dao.ProdutoDAO;
-import model.Produto;
 
-public class main {
+import dao.ProdutoDAO;
+import dao.FornecedorDAO;
+import model.Produto;
+import java.util.Date;
+
+public class Main {
     public static void main(String[] args) {
         ProdutoDAO produtoDAO = new ProdutoDAO();
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
         
-        Produto produto = new Produto("Alface Orgânica", 1.50, 3.00, 50);
-        produtoDAO.adicionarProduto(produto);
-
-        Produto produtoBuscado = produtoDAO.buscarProdutoPorNome("Alface Orgânica");
-        if (produtoBuscado != null) {
-            System.out.println("Produto encontrado: " + produtoBuscado.getNome() + " - Quantidade: " + produtoBuscado.getQuantidade());
+        Produto produto = new Produto("Cenoura Orgânica", "Vegetais", 2.80, 60, 120, new Date(), 1);
+        
+        if (fornecedorDAO.verificarFornecedorPorId(produto.getIdFornecedor())) {
+            Produto produtoBuscado = produtoDAO.buscarProdutoPorNome(produto.getNome());
+        
+            if (produtoBuscado == null) {
+                produtoDAO.adicionarProduto(produto);
+                System.out.println("Produto adicionado: " + produto.getNome());
+            } else {
+                System.out.println("Produto já existe: " + produtoBuscado.getNome() + 
+                                   " - Preço: " + produtoBuscado.getPreco() +
+                                   " - Quantidade em Estoque: " + produtoBuscado.getQuantidadeEstoque());
+            }
         } else {
-            System.out.println("Produto não encontrado.");
+            System.out.println("Erro: O fornecedor com ID " + produto.getIdFornecedor() + " não existe.");
         }
     }
 }
