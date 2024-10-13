@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 07/10/2024 às 01:34
+-- Tempo de geração: 13/10/2024 às 20:10
 -- Versão do servidor: 8.3.0
 -- Versão do PHP: 8.2.18
 
@@ -47,24 +47,48 @@ INSERT INTO `alertas_estoque` (`id`, `id_produto`, `data_alerta`, `mensagem`) VA
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `caixa`
+--
+
+DROP TABLE IF EXISTS `caixa`;
+CREATE TABLE IF NOT EXISTS `caixa` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `data_abertura` datetime DEFAULT NULL,
+  `data_fechamento` datetime DEFAULT NULL,
+  `saldo` decimal(10,2) DEFAULT NULL,
+  `registros` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `caixa`
+--
+
+INSERT INTO `caixa` (`id`, `data_abertura`, `data_fechamento`, `saldo`, `registros`) VALUES
+(1, '2024-10-13 00:00:00', '2024-10-14 00:00:00', 100.00, 'Saldo Inicial');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `clientes`
 --
 
 DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE IF NOT EXISTS `clientes` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(80) DEFAULT NULL,
   `email` varchar(80) DEFAULT NULL,
   `telefone` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `clientes`
 --
 
 INSERT INTO `clientes` (`id`, `nome`, `email`, `telefone`) VALUES
-(1, 'Gabriel', '247579@facens.br', '15997671792');
+(1, 'Gabriel', '247579@facens.br', '15997671792'),
+(2, 'teste', 'teste@email.com', '12312312');
 
 -- --------------------------------------------------------
 
@@ -99,20 +123,21 @@ INSERT INTO `estoque` (`id`, `id_venda`, `id_produto`, `quantidade`, `preco_unit
 
 DROP TABLE IF EXISTS `fornecedores`;
 CREATE TABLE IF NOT EXISTS `fornecedores` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(80) DEFAULT NULL,
   `contato` varchar(15) DEFAULT NULL,
   `telefone` varchar(15) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `fornecedores`
 --
 
 INSERT INTO `fornecedores` (`id`, `nome`, `contato`, `telefone`, `email`) VALUES
-(1, 'HortiExpress', '159999999', 'hortiExpress@gm', '159999999');
+(1, 'HortiExpress', '159999999', 'hortiExpress@gm', '159999999'),
+(2, 'Teste Fornec', '120398120', '1231231231', 'testeforn@email.com');
 
 -- --------------------------------------------------------
 
@@ -156,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `id_fornecedor` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_fornecedor` (`id_fornecedor`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `produtos`
@@ -166,7 +191,8 @@ INSERT INTO `produtos` (`id`, `nome`, `categoria`, `preco`, `quantidade_estoque`
 (1, 'Hortelã', 'vegetal', 10.00, 100, 120, '2024-09-28', 1),
 (2, 'Alface Orgânica', 'Vegetais', 3.00, 50, 100, '2024-10-06', 1),
 (3, 'Tomate Orgânico', 'Vegetais', 4.50, 75, 150, '2024-10-06', 1),
-(4, 'Cenoura Orgânica', 'Vegetais', 2.80, 60, 120, '2024-10-06', 1);
+(4, 'Cenoura Orgânica', 'Vegetais', 2.80, 60, 120, '2024-10-06', 1),
+(5, 'Teste Cadastro', 'Teste', 10.00, 1, 10, '2024-10-13', 1);
 
 -- --------------------------------------------------------
 
