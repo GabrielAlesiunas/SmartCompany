@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import model.Estoque;
+=======
+import model.Estoque; // Certifique-se de importar o modelo Estoque
+>>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
 
 public class EstoqueDAO {
 
@@ -20,7 +24,11 @@ public class EstoqueDAO {
 
             while (rs.next()) {
                 Estoque item = new Estoque();
+<<<<<<< HEAD
                 item.setId(rs.getInt("id"));
+=======
+                item.setId(rs.getInt("id")); // Defina o ID do estoque
+>>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
                 item.setIdVenda(rs.getInt("id_venda"));
                 item.setIdProduto(rs.getInt("id_produto"));
                 item.setQuantidade(rs.getInt("quantidade"));
@@ -32,6 +40,7 @@ public class EstoqueDAO {
         }
         return estoque;
     }
+<<<<<<< HEAD
     
     public List<Estoque> listarEstoqueBaixo(int limite) {
         List<Estoque> estoqueBaixo = new ArrayList<>();
@@ -57,4 +66,6 @@ public class EstoqueDAO {
         }
         return estoqueBaixo;
     }
+=======
+>>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
 }
