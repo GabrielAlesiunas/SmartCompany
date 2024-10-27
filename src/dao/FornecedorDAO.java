@@ -51,10 +51,7 @@ public class FornecedorDAO {
             if (rs.next()) {
                 fornecedor = new Fornecedores(
                     rs.getString("nome"),
-<<<<<<< HEAD
-                    rs.getString("cnpj"),
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
+                    rs.getString("cnpj"),  // Inclui o CNPJ
                     rs.getString("contato"),
                     rs.getString("telefone"),
                     rs.getString("email")
@@ -67,26 +64,16 @@ public class FornecedorDAO {
     }
 
     public void cadastrarFornecedor(Fornecedores fornecedor) {
-<<<<<<< HEAD
         String sql = "INSERT INTO fornecedores (nome, cnpj, contato, telefone, email) VALUES (?, ?, ?, ?, ?)"; // Adicionado CNPJ
-=======
-        String sql = "INSERT INTO fornecedores (nome, contato, telefone, email) VALUES (?, ?, ?, ?)";
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
 
         try (Connection conn = ConexaoDB.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, fornecedor.getNome());
-<<<<<<< HEAD
             stmt.setString(2, fornecedor.getCnpj());
             stmt.setString(3, fornecedor.getContato());
             stmt.setString(4, fornecedor.getTelefone());
             stmt.setString(5, fornecedor.getEmail());
-=======
-            stmt.setString(2, fornecedor.getContato()); // Corrigido a ordem
-            stmt.setString(3, fornecedor.getTelefone()); // Corrigido a ordem
-            stmt.setString(4, fornecedor.getEmail()); // Corrigido a ordem
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
             stmt.executeUpdate();
 
             System.out.println("Fornecedor cadastrado com sucesso!");
@@ -106,10 +93,7 @@ public class FornecedorDAO {
             while (rs.next()) {
                 Fornecedores fornecedor = new Fornecedores(
                     rs.getString("nome"),
-<<<<<<< HEAD
-                    rs.getString("cnpj"),
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
+                    rs.getString("cnpj"),  // Inclui o CNPJ
                     rs.getString("contato"),
                     rs.getString("telefone"),
                     rs.getString("email")
@@ -135,10 +119,7 @@ public class FornecedorDAO {
             while (rs.next()) {
                 Fornecedores fornecedor = new Fornecedores(
                     rs.getString("nome"),
-<<<<<<< HEAD
-                    rs.getString("cnpj"),
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
+                    rs.getString("cnpj"),  // Inclui o CNPJ
                     rs.getString("contato"),
                     rs.getString("telefone"),
                     rs.getString("email")

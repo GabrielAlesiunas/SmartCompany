@@ -9,8 +9,7 @@ public class Produto {
     private double preco;
     private int quantidadeEstoque;
     private int limiteEstoque;
-<<<<<<< HEAD
-    private LocalDate dataAdicao = LocalDate.now();
+    private LocalDate dataAdicao;
     private int idFornecedor;
 
     public Produto(String nome, String categoria, double preco, int quantidadeEstoque, int limiteEstoque, LocalDate dataAdicao, int idFornecedor) {
@@ -20,22 +19,12 @@ public class Produto {
         if (quantidadeEstoque < 0) throw new IllegalArgumentException("Quantidade em estoque não pode ser negativa");
         if (limiteEstoque < 0) throw new IllegalArgumentException("Limite de estoque não pode ser negativo");
 
-=======
-    private Date dataAdicao;
-    private int idFornecedor;
-
-    public Produto(String nome, String categoria, double preco, int quantidadeEstoque, int limiteEstoque, Date dataAdicao, int idFornecedor) {
-        if (preco < 0) throw new IllegalArgumentException("Preço não pode ser negativo");
-        if (quantidadeEstoque < 0) throw new IllegalArgumentException("Quantidade em estoque não pode ser negativa");
-        if (limiteEstoque < 0) throw new IllegalArgumentException("Limite de estoque não pode ser negativo");
-        
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
         this.nome = nome;
         this.categoria = categoria;
         this.preco = preco;
         this.quantidadeEstoque = quantidadeEstoque;
         this.limiteEstoque = limiteEstoque;
-        this.dataAdicao = dataAdicao;
+        this.dataAdicao = (dataAdicao != null) ? dataAdicao : LocalDate.now();
         this.idFornecedor = idFornecedor;
     }
 
@@ -59,7 +48,7 @@ public class Produto {
         return limiteEstoque;
     }
 
-    public LocalDate getDataAdicao() { // Altera o retorno para LocalDate
+    public LocalDate getDataAdicao() {
         return dataAdicao;
     }
 
@@ -72,15 +61,11 @@ public class Produto {
         this.quantidadeEstoque = quantidade;
     }
 
-<<<<<<< HEAD
-    // Método para atualizar o limite de estoque
     public void setLimiteEstoque(int limiteEstoque) {
         if (limiteEstoque < 0) throw new IllegalArgumentException("Limite de estoque não pode ser negativo");
         this.limiteEstoque = limiteEstoque;
     }
 
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
     @Override
     public String toString() {
         return "Produto{" +
@@ -93,7 +78,6 @@ public class Produto {
                 ", idFornecedor=" + idFornecedor +
                 '}';
     }
-<<<<<<< HEAD
 
     @Override
     public boolean equals(Object o) {
@@ -113,6 +97,4 @@ public class Produto {
     public int hashCode() {
         return Objects.hash(nome, categoria, preco, quantidadeEstoque, limiteEstoque, dataAdicao, idFornecedor);
     }
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
 }

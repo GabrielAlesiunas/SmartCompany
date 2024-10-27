@@ -1,30 +1,23 @@
 package view;
 
-import dao.ProdutoDAO;
-import dao.FornecedorDAO;
+import dao.AlertaEstoqueDAO;
+import dao.CaixaDAO;
 import dao.ClienteDAO;
 import dao.EstoqueDAO;
+import dao.FornecedorDAO;
 import dao.PagamentosDAO;
+import dao.ProdutoDAO;
 import dao.VendasDAO;
-import dao.CaixaDAO;
-<<<<<<< HEAD
-import dao.AlertaEstoqueDAO;
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
-import model.Produto;
-import model.Fornecedores;
+import model.AlertaEstoque;
+import model.Caixa;
 import model.Cliente;
 import model.Estoque;
+import model.Fornecedores;
 import model.Pagamentos;
+import model.Produto;
 import model.Vendas;
-import model.Caixa;
-<<<<<<< HEAD
-import model.AlertaEstoque;
 import java.util.Date;
 import java.time.LocalDate;
-=======
-import java.util.Date;
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,10 +31,7 @@ public class Main {
         PagamentosDAO pagamentoDAO = new PagamentosDAO();
         VendasDAO vendasDAO = new VendasDAO();
         CaixaDAO caixaDAO = new CaixaDAO();
-<<<<<<< HEAD
         AlertaEstoqueDAO alertaEstoqueDAO = new AlertaEstoqueDAO();
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
         
         boolean continuar = true;
         boolean menuAberto = true;
@@ -63,10 +53,7 @@ public class Main {
                 System.out.println("11) Consultar Vendas");
                 System.out.println("12) Consultar Pagamentos");
                 System.out.println("13) Consultar Estoque");
-<<<<<<< HEAD
                 System.out.println("14) Alerta Estoque");
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
                 System.out.println("99) Abrir Menu Novamente");
                 System.out.println("0) Sair");
                 System.out.print("Digite sua opção: ");
@@ -128,25 +115,22 @@ public class Main {
                     consultarEstoque(estoqueDAO);
                     menuAberto = false;
                     break;
-<<<<<<< HEAD
                 case 14:
                 	verificarEstoqueBaixo(estoqueDAO, alertaEstoqueDAO);
                     menuAberto = false;
                     break;
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
                 case 0:
                     continuar = false;
                     System.out.println("Saindo do sistema. Até logo!");
                     break;
                 case 99:
-                    menuAberto = true; // O usuário escolheu abrir o menu novamente
+                    menuAberto = true;
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
         }
-        scanner.close(); // Fechar o scanner ao final
+        scanner.close();
     }
 
     private static void consultarTodosProdutos(ProdutoDAO produtoDAO) {
@@ -160,436 +144,217 @@ public class Main {
                                    ", Preço: " + produto.getPreco() + 
                                    ", Estoque: " + produto.getQuantidadeEstoque());
             }
-<<<<<<< HEAD
         }
     }
 
     private static void consultarTodosFornecedores(FornecedorDAO fornecedorDAO) {
-        List<Fornecedores> fornecedores = fornecedorDAO.buscarTodosFornecedores();
-        if (fornecedores.isEmpty()) {
-            System.out.println("Nenhum fornecedor cadastrado.");
-        } else {
-            for (Fornecedores fornecedor : fornecedores) {
-                System.out.println("Nome: " + fornecedor.getNome() + 
-                                   ", Contato: " + fornecedor.getContato() + 
-                                   ", Telefone: " + fornecedor.getTelefone() + 
-                                   ", Email: " + fornecedor.getEmail());
-            }
+    List<Fornecedores> fornecedores = fornecedorDAO.buscarTodosFornecedores();
+    if (fornecedores.isEmpty()) {
+        System.out.println("Nenhum fornecedor cadastrado.");
+    } else {
+        for (Fornecedores fornecedor : fornecedores) {
+            System.out.println("Nome: " + fornecedor.getNome() + 
+                               ", Contato: " + fornecedor.getContato() + 
+                               ", Telefone: " + fornecedor.getTelefone() + 
+                               ", Email: " + fornecedor.getEmail());
         }
     }
-
-    private static void buscarFornecedorPorNome(FornecedorDAO fornecedorDAO, Scanner scanner) {
-        System.out.print("Digite o nome do fornecedor a ser buscado: ");
-        String nome = scanner.nextLine();
-
-        List<Fornecedores> fornecedoresEncontrados = fornecedorDAO.buscarFornecedorPorNome(nome);
-        if (fornecedoresEncontrados.isEmpty()) {
-            System.out.println("Nenhum fornecedor encontrado com o nome: " + nome);
-        } else {
-            System.out.println("Fornecedores encontrados:");
-            for (Fornecedores fornecedor : fornecedoresEncontrados) {
-                System.out.println("Nome: " + fornecedor.getNome() + 
-                                   ", Contato: " + fornecedor.getContato() + 
-                                   ", Telefone: " + fornecedor.getTelefone() + 
-                                   ", Email: " + fornecedor.getEmail());
-            }
-        }
-    }
-
-    private static void buscarProdutoPorNomeParcial(ProdutoDAO produtoDAO, Scanner scanner) {
-        System.out.print("Digite o nome do produto a ser buscado: ");
-        String nome = scanner.nextLine();
-
-        List<Produto> produtosEncontrados = produtoDAO.buscarProdutoPorNomeParcial(nome);
-        if (produtosEncontrados.isEmpty()) {
-            System.out.println("Nenhum produto encontrado com o nome: " + nome);
-        } else {
-            System.out.println("Produtos encontrados:");
-            for (Produto produto : produtosEncontrados) {
-                System.out.println("Nome: " + produto.getNome() + 
-                                   ", Categoria: " + produto.getCategoria() + 
-                                   ", Preço: " + produto.getPreco() + 
-                                   ", Estoque: " + produto.getQuantidadeEstoque());
-            }
-        }
-    }
-
-    private static void cadastrarProduto(ProdutoDAO produtoDAO, Scanner scanner) {
-        System.out.print("Digite o nome do produto: ");
-        String nome = scanner.nextLine();
-
-        // Verificar se o produto já existe
-        if (produtoDAO.verificarProdutoExistente(nome)) {
-            System.out.println("Produto já existe. Tente outro nome.");
-            return;
-        }
-
-        System.out.print("Digite a categoria do produto: ");
-        String categoria = scanner.nextLine();
-        System.out.print("Digite o preço do produto: ");
-        double preco = scanner.nextDouble();
-        System.out.print("Digite a quantidade em estoque: ");
-        int quantidadeEstoque = scanner.nextInt();
-        System.out.print("Digite o limite de estoque: ");
-        int limiteEstoque = scanner.nextInt();
-        System.out.print("Digite o ID do fornecedor: ");
-        int idFornecedor = scanner.nextInt();
-        LocalDate dataAdicao = LocalDate.now();
-        
-        Produto produto = new Produto(nome, categoria, preco, quantidadeEstoque, limiteEstoque, dataAdicao, idFornecedor);
-        produtoDAO.adicionarProduto(produto);
-        System.out.println("Produto cadastrado com sucesso!");
-    }
-
-    private static void cadastrarFornecedor(FornecedorDAO fornecedorDAO, Scanner scanner) {
-        System.out.print("Digite o nome do fornecedor: ");
-        String nome = scanner.nextLine();
-        
-        System.out.print("Digite o CNPJ do fornecedor: ");
-        String cnpj = scanner.nextLine();
-        
-        System.out.print("Digite o contato do fornecedor: ");
-        String contato = scanner.nextLine();
-        
-        System.out.print("Digite o telefone do fornecedor: ");
-        String telefone = scanner.nextLine();
-        
-        System.out.print("Digite o e-mail do fornecedor: ");
-        String email = scanner.nextLine();
-
-        Fornecedores fornecedor = new Fornecedores(nome, cnpj, contato, telefone, email);
-        
-        fornecedorDAO.cadastrarFornecedor(fornecedor);
-        System.out.println("Fornecedor cadastrado com sucesso!");
-    }
-
-    private static void consultarClientes(ClienteDAO clienteDAO) {
-        List<Cliente> clientes = clienteDAO.buscarTodosClientes();
-        if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
-        } else {
-            for (Cliente cliente : clientes) {
-                System.out.println("Nome: " + cliente.getNome() + 
-                                   ", Email: " + cliente.getEmail() + 
-                                   ", Telefone: " + cliente.getTelefone());
-            }
-        }
-    }
-
-    private static void cadastrarCliente(ClienteDAO clienteDAO, Scanner scanner) {
-        System.out.print("Digite o nome do cliente: ");
-        String nome = scanner.nextLine();
-        System.out.print("Digite o email do cliente: ");
-        String email = scanner.nextLine();
-        System.out.print("Digite o telefone do cliente: ");
-        String telefone = scanner.nextLine();
-
-        Cliente cliente = new Cliente(nome, email, telefone);
-        clienteDAO.cadastrarCliente(cliente);
-        System.out.println("Cliente cadastrado com sucesso!");
-    }
-
-    // O método buscarClientePorNome foi atualizado para ser estático
-    private static void buscarClientePorNome(ClienteDAO clienteDAO, Scanner scanner) {
-        System.out.print("Digite o nome do cliente: ");
-        String nomeCliente = scanner.nextLine();
-
-        Cliente cliente = clienteDAO.buscarClientePorNome(nomeCliente);
-
-        if (cliente != null) {
-            System.out.println("Cliente encontrado:");
-            System.out.println("Nome: " + cliente.getNome());
-            System.out.println("Email: " + cliente.getEmail());
-            System.out.println("Telefone: " + cliente.getTelefone());
-        } else {
-            System.out.println("Cliente não encontrado.");
-        }
-    }
-    
-    private static void consultarEstoque(EstoqueDAO estoqueDAO) {
-    	List<Estoque> estoques = estoqueDAO.listarEstoque(); // Use o método listarEstoque
-    	if (estoques.isEmpty()) {
-    		System.out.println("Nenhum item no estoque.");
-    	} else {
-    		for (Estoque estoque : estoques) {
-    			System.out.println("ID: " + estoque.getId() +
-    					", ID Venda: " + estoque.getIdVenda() +
-    					", ID Produto: " + estoque.getIdProduto() +
-    					", Quantidade: " + estoque.getQuantidade() +
-    					", Preço Unitário: " + estoque.getPrecoUnitario());
-    		}
-    	}
-    }
-    
-    private static void listarPagamentos(PagamentosDAO pagamentoDAO) {
-        List<Pagamentos> pagamentos = pagamentoDAO.listarPagamentos();
-        if (pagamentos.isEmpty()) {
-            System.out.println("Nenhum pagamento registrado.");
-        } else {
-            for (Pagamentos p : pagamentos) {
-                System.out.println("ID: " + p.getId() +
-                                   ", Venda ID: " + p.getIdVenda() +
-                                   ", Método: " + p.getMetodoPagamento() +
-                                   ", Data: " + p.getDataPagamento() +
-                                   ", Valor: " + p.getValorPago());
-            }
-        }
-    }
-    
-    private static void consultarVendas(VendasDAO vendasDAO) {
-        List<Vendas> vendas = vendasDAO.consultarVendas();
-        if (vendas.isEmpty()) {
-            System.out.println("Nenhuma venda registrada.");
-        } else {
-            for (Vendas venda : vendas) {
-                System.out.println("Venda ID: " + venda.getId() +
-                                   ", Data: " + venda.getDataVenda() +
-                                   ", Valor Total: " + venda.getValorTotal() +
-                                   ", ID Cliente: " + venda.getIdCliente());
-            }
-        }
-    }
-    
-    private static void consultarCaixa(CaixaDAO caixaDAO) {
-        List<String> registros = caixaDAO.consultarRegistrosCaixa();
-        if (registros.isEmpty()) {
-            System.out.println("Nenhum registro encontrado no caixa.");
-        } else {
-            for (String registro : registros) {
-                System.out.println(registro);
-            }
-        }
-    }
-    
-    private static void verificarEstoqueBaixo(EstoqueDAO estoqueDAO, AlertaEstoqueDAO alertaEstoqueDAO) {
-        int limiteEstoque = 10;
-        List<Estoque> estoqueBaixo = estoqueDAO.listarEstoqueBaixo(limiteEstoque);
-
-        if (estoqueBaixo.isEmpty()) {
-            System.out.println("Nenhum produto com estoque baixo.");
-        } else {
-            for (Estoque item : estoqueBaixo) {
-                String mensagem = "Estoque baixo para o produto ID " + item.getIdProduto() + 
-                                  ". Quantidade atual: " + item.getQuantidade();
-                alertaEstoqueDAO.adicionarAlerta(item.getIdProduto(), mensagem);
-                System.out.println("Alerta gerado para o produto ID: " + item.getIdProduto());
-            }
-=======
->>>>>>> ff156fb5ecb2f226116f4ecf66723d3c24558215
-        }
-    }
-
-    private static void consultarTodosFornecedores(FornecedorDAO fornecedorDAO) {
-        List<Fornecedores> fornecedores = fornecedorDAO.buscarTodosFornecedores();
-        if (fornecedores.isEmpty()) {
-            System.out.println("Nenhum fornecedor cadastrado.");
-        } else {
-            for (Fornecedores fornecedor : fornecedores) {
-                System.out.println("Nome: " + fornecedor.getNome() + 
-                                   ", Contato: " + fornecedor.getContato() + 
-                                   ", Telefone: " + fornecedor.getTelefone() + 
-                                   ", Email: " + fornecedor.getEmail());
-            }
-        }
-    }
-
-    private static void buscarFornecedorPorNome(FornecedorDAO fornecedorDAO, Scanner scanner) {
-        System.out.print("Digite o nome do fornecedor a ser buscado: ");
-        String nome = scanner.nextLine();
-
-        List<Fornecedores> fornecedoresEncontrados = fornecedorDAO.buscarFornecedorPorNome(nome);
-        if (fornecedoresEncontrados.isEmpty()) {
-            System.out.println("Nenhum fornecedor encontrado com o nome: " + nome);
-        } else {
-            System.out.println("Fornecedores encontrados:");
-            for (Fornecedores fornecedor : fornecedoresEncontrados) {
-                System.out.println("Nome: " + fornecedor.getNome() + 
-                                   ", Contato: " + fornecedor.getContato() + 
-                                   ", Telefone: " + fornecedor.getTelefone() + 
-                                   ", Email: " + fornecedor.getEmail());
-            }
-        }
-    }
-
-    private static void buscarProdutoPorNomeParcial(ProdutoDAO produtoDAO, Scanner scanner) {
-        System.out.print("Digite o nome do produto a ser buscado: ");
-        String nome = scanner.nextLine();
-
-        List<Produto> produtosEncontrados = produtoDAO.buscarProdutoPorNomeParcial(nome);
-        if (produtosEncontrados.isEmpty()) {
-            System.out.println("Nenhum produto encontrado com o nome: " + nome);
-        } else {
-            System.out.println("Produtos encontrados:");
-            for (Produto produto : produtosEncontrados) {
-                System.out.println("Nome: " + produto.getNome() + 
-                                   ", Categoria: " + produto.getCategoria() + 
-                                   ", Preço: " + produto.getPreco() + 
-                                   ", Estoque: " + produto.getQuantidadeEstoque());
-            }
-        }
-    }
-
-    private static void cadastrarProduto(ProdutoDAO produtoDAO, Scanner scanner) {
-        System.out.print("Digite o nome do produto: ");
-        String nome = scanner.nextLine();
-
-        // Verificar se o produto já existe
-        if (produtoDAO.verificarProdutoExistente(nome)) {
-            System.out.println("Produto já existe. Tente outro nome.");
-            return;
-        }
-
-        System.out.print("Digite a categoria do produto: ");
-        String categoria = scanner.nextLine();
-        System.out.print("Digite o preço do produto: ");
-        double preco = scanner.nextDouble();
-        System.out.print("Digite a quantidade em estoque: ");
-        int quantidadeEstoque = scanner.nextInt();
-        System.out.print("Digite o limite de estoque: ");
-        int limiteEstoque = scanner.nextInt();
-        System.out.print("Digite o ID do fornecedor: ");
-        int idFornecedor = scanner.nextInt();
-        
-        Produto produto = new Produto(nome, categoria, preco, quantidadeEstoque, limiteEstoque, new Date(), idFornecedor);
-        produtoDAO.adicionarProduto(produto);
-        System.out.println("Produto cadastrado com sucesso!");
-    }
-
-    private static void cadastrarFornecedor(FornecedorDAO fornecedorDAO, Scanner scanner) {
-        System.out.print("Digite o nome do fornecedor: ");
-        String nome = scanner.nextLine();
-        
-        System.out.print("Digite o CNPJ do fornecedor: ");
-        String cnpj = scanner.nextLine();
-        
-        System.out.print("Digite o contato do fornecedor: ");
-        String contato = scanner.nextLine();
-        
-        System.out.print("Digite o telefone do fornecedor: ");
-        String telefone = scanner.nextLine();
-        
-        System.out.print("Digite o e-mail do fornecedor: ");
-        String email = scanner.nextLine();
-
-        Fornecedores fornecedor = new Fornecedores(nome, contato, telefone, email);
-        
-        fornecedorDAO.cadastrarFornecedor(fornecedor);
-        System.out.println("Fornecedor cadastrado com sucesso!");
-    }
-
-    private static void consultarHistoricoCaixa() {
-        // Implemente a lógica para exibir o histórico do caixa
-        System.out.println("Histórico do caixa:");
-        // Exiba o histórico aqui
-    }
-
-    private static void consultarClientes(ClienteDAO clienteDAO) {
-        List<Cliente> clientes = clienteDAO.buscarTodosClientes();
-        if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
-        } else {
-            for (Cliente cliente : clientes) {
-                System.out.println("Nome: " + cliente.getNome() + 
-                                   ", Email: " + cliente.getEmail() + 
-                                   ", Telefone: " + cliente.getTelefone());
-            }
-        }
-    }
-
-    private static void cadastrarCliente(ClienteDAO clienteDAO, Scanner scanner) {
-        System.out.print("Digite o nome do cliente: ");
-        String nome = scanner.nextLine();
-        System.out.print("Digite o email do cliente: ");
-        String email = scanner.nextLine();
-        System.out.print("Digite o telefone do cliente: ");
-        String telefone = scanner.nextLine();
-
-        Cliente cliente = new Cliente(nome, email, telefone);
-        clienteDAO.cadastrarCliente(cliente);
-        System.out.println("Cliente cadastrado com sucesso!");
-    }
-
-    private static void consultarVendas() {
-        // Implementar a lógica de consulta de vendas
-        System.out.println("Consultando vendas...");
-    }
-
-    private static void consultarPagamentos() {
-        // Implementar a lógica de consulta de pagamentos
-        System.out.println("Consultando pagamentos...");
-    }
-
-    // O método buscarClientePorNome foi atualizado para ser estático
-    private static void buscarClientePorNome(ClienteDAO clienteDAO, Scanner scanner) {
-        System.out.print("Digite o nome do cliente: ");
-        String nomeCliente = scanner.nextLine();
-
-        Cliente cliente = clienteDAO.buscarClientePorNome(nomeCliente);
-
-        if (cliente != null) {
-            System.out.println("Cliente encontrado:");
-            System.out.println("Nome: " + cliente.getNome());
-            System.out.println("Email: " + cliente.getEmail());
-            System.out.println("Telefone: " + cliente.getTelefone());
-        } else {
-            System.out.println("Cliente não encontrado.");
-        }
-    }
-    
-    private static void consultarEstoque(EstoqueDAO estoqueDAO) {
-    	List<Estoque> estoques = estoqueDAO.listarEstoque(); // Use o método listarEstoque
-    	if (estoques.isEmpty()) {
-    		System.out.println("Nenhum item no estoque.");
-    	} else {
-    		for (Estoque estoque : estoques) {
-    			System.out.println("ID: " + estoque.getId() +
-    					", ID Venda: " + estoque.getIdVenda() +
-    					", ID Produto: " + estoque.getIdProduto() +
-    					", Quantidade: " + estoque.getQuantidade() +
-    					", Preço Unitário: " + estoque.getPrecoUnitario());
-    		}
-    	}
-    }
-    
-    private static void listarPagamentos(PagamentosDAO pagamentoDAO) {
-        List<Pagamentos> pagamentos = pagamentoDAO.listarPagamentos();
-        if (pagamentos.isEmpty()) {
-            System.out.println("Nenhum pagamento registrado.");
-        } else {
-            for (Pagamentos p : pagamentos) {
-                System.out.println("ID: " + p.getId() +
-                                   ", Venda ID: " + p.getIdVenda() +
-                                   ", Método: " + p.getMetodoPagamento() +
-                                   ", Data: " + p.getDataPagamento() +
-                                   ", Valor: " + p.getValorPago());
-            }
-        }
-    }
-    
-    private static void consultarVendas(VendasDAO vendasDAO) {
-        List<Vendas> vendas = vendasDAO.consultarVendas();
-        if (vendas.isEmpty()) {
-            System.out.println("Nenhuma venda registrada.");
-        } else {
-            for (Vendas venda : vendas) {
-                System.out.println("Venda ID: " + venda.getId() +
-                                   ", Data: " + venda.getDataVenda() +
-                                   ", Valor Total: " + venda.getValorTotal() +
-                                   ", ID Cliente: " + venda.getIdCliente());
-            }
-        }
-    }
-    
-    private static void consultarCaixa(CaixaDAO caixaDAO) {
-        List<String> registros = caixaDAO.consultarRegistrosCaixa();
-        if (registros.isEmpty()) {
-            System.out.println("Nenhum registro encontrado no caixa.");
-        } else {
-            for (String registro : registros) {
-                System.out.println(registro);
-            }
-        }
-    }
-
-    
 }
+
+private static void buscarFornecedorPorNome(FornecedorDAO fornecedorDAO, Scanner scanner) {
+    System.out.print("Digite o nome do fornecedor a ser buscado: ");
+    String nome = scanner.nextLine();
+
+    List<Fornecedores> fornecedoresEncontrados = fornecedorDAO.buscarFornecedorPorNome(nome);
+    if (fornecedoresEncontrados.isEmpty()) {
+        System.out.println("Nenhum fornecedor encontrado com o nome: " + nome);
+    } else {
+        System.out.println("Fornecedores encontrados:");
+        for (Fornecedores fornecedor : fornecedoresEncontrados) {
+            System.out.println("Nome: " + fornecedor.getNome() + 
+                               ", Contato: " + fornecedor.getContato() + 
+                               ", Telefone: " + fornecedor.getTelefone() + 
+                               ", Email: " + fornecedor.getEmail());
+        }
+    }
+}
+
+private static void buscarProdutoPorNomeParcial(ProdutoDAO produtoDAO, Scanner scanner) {
+    System.out.print("Digite o nome do produto a ser buscado: ");
+    String nome = scanner.nextLine();
+
+    List<Produto> produtosEncontrados = produtoDAO.buscarProdutoPorNomeParcial(nome);
+    if (produtosEncontrados.isEmpty()) {
+        System.out.println("Nenhum produto encontrado com o nome: " + nome);
+    } else {
+        System.out.println("Produtos encontrados:");
+        for (Produto produto : produtosEncontrados) {
+            System.out.println("Nome: " + produto.getNome() + 
+                               ", Categoria: " + produto.getCategoria() + 
+                               ", Preço: " + produto.getPreco() + 
+                               ", Estoque: " + produto.getQuantidadeEstoque());
+        }
+    }
+}
+
+private static void cadastrarProduto(ProdutoDAO produtoDAO, Scanner scanner) {
+    System.out.print("Digite o nome do produto: ");
+    String nome = scanner.nextLine();
+
+    if (produtoDAO.verificarProdutoExistente(nome)) {
+        System.out.println("Produto já existe. Tente outro nome.");
+        return;
+    }
+
+    System.out.print("Digite a categoria do produto: ");
+    String categoria = scanner.nextLine();
+    System.out.print("Digite o preço do produto: ");
+    double preco = scanner.nextDouble();
+    System.out.print("Digite a quantidade em estoque: ");
+    int quantidadeEstoque = scanner.nextInt();
+    System.out.print("Digite o limite de estoque: ");
+    int limiteEstoque = scanner.nextInt();
+    System.out.print("Digite o ID do fornecedor: ");
+    int idFornecedor = scanner.nextInt();
+    
+    Produto produto = new Produto(nome, categoria, preco, quantidadeEstoque, limiteEstoque, LocalDate.now(), idFornecedor);
+    produtoDAO.adicionarProduto(produto);
+    System.out.println("Produto cadastrado com sucesso!");
+}
+
+private static void cadastrarFornecedor(FornecedorDAO fornecedorDAO, Scanner scanner) {
+    System.out.print("Digite o nome do fornecedor: ");
+    String nome = scanner.nextLine();
+    
+    System.out.print("Digite o CNPJ do fornecedor: ");
+    String cnpj = scanner.nextLine();
+    
+    System.out.print("Digite o contato do fornecedor: ");
+    String contato = scanner.nextLine();
+    
+    System.out.print("Digite o telefone do fornecedor: ");
+    String telefone = scanner.nextLine();
+    
+    System.out.print("Digite o e-mail do fornecedor: ");
+    String email = scanner.nextLine();
+
+    Fornecedores fornecedor = new Fornecedores(nome, cnpj, contato, telefone, email);
+    
+    fornecedorDAO.cadastrarFornecedor(fornecedor);
+    System.out.println("Fornecedor cadastrado com sucesso!");
+}
+
+private static void consultarClientes(ClienteDAO clienteDAO) {
+    List<Cliente> clientes = clienteDAO.buscarTodosClientes();
+    if (clientes.isEmpty()) {
+        System.out.println("Nenhum cliente cadastrado.");
+    } else {
+        for (Cliente cliente : clientes) {
+            System.out.println("Nome: " + cliente.getNome() + 
+                               ", Email: " + cliente.getEmail() + 
+                               ", Telefone: " + cliente.getTelefone());
+        }
+    }
+}
+
+private static void cadastrarCliente(ClienteDAO clienteDAO, Scanner scanner) {
+    System.out.print("Digite o nome do cliente: ");
+    String nome = scanner.nextLine();
+    System.out.print("Digite o email do cliente: ");
+    String email = scanner.nextLine();
+    System.out.print("Digite o telefone do cliente: ");
+    String telefone = scanner.nextLine();
+
+    Cliente cliente = new Cliente(nome, email, telefone);
+    clienteDAO.cadastrarCliente(cliente);
+    System.out.println("Cliente cadastrado com sucesso!");
+}
+
+private static void buscarClientePorNome(ClienteDAO clienteDAO, Scanner scanner) {
+    System.out.print("Digite o nome do cliente: ");
+    String nomeCliente = scanner.nextLine();
+
+    Cliente cliente = clienteDAO.buscarClientePorNome(nomeCliente);
+
+    if (cliente != null) {
+        System.out.println("Cliente encontrado:");
+        System.out.println("Nome: " + cliente.getNome());
+        System.out.println("Email: " + cliente.getEmail());
+        System.out.println("Telefone: " + cliente.getTelefone());
+    } else {
+        System.out.println("Cliente não encontrado.");
+    }
+}
+
+private static void consultarEstoque(EstoqueDAO estoqueDAO) {
+    List<Estoque> estoques = estoqueDAO.listarEstoque();
+    if (estoques.isEmpty()) {
+        System.out.println("Nenhum item no estoque.");
+    } else {
+        for (Estoque estoque : estoques) {
+            System.out.println("ID: " + estoque.getId() +
+                               ", ID Venda: " + estoque.getIdVenda() +
+                               ", ID Produto: " + estoque.getIdProduto() +
+                               ", Quantidade: " + estoque.getQuantidade() +
+                               ", Preço Unitário: " + estoque.getPrecoUnitario());
+        }
+    }
+}
+
+private static void listarPagamentos(PagamentosDAO pagamentoDAO) {
+    List<Pagamentos> pagamentos = pagamentoDAO.listarPagamentos();
+    if (pagamentos.isEmpty()) {
+        System.out.println("Nenhum pagamento registrado.");
+    } else {
+        for (Pagamentos p : pagamentos) {
+            System.out.println("ID: " + p.getId() +
+                               ", Venda ID: " + p.getIdVenda() +
+                               ", Método: " + p.getMetodoPagamento() +
+                               ", Data: " + p.getDataPagamento() +
+                               ", Valor: " + p.getValorPago());
+        }
+    }
+}
+
+private static void consultarVendas(VendasDAO vendasDAO) {
+    List<Vendas> vendas = vendasDAO.consultarVendas();
+    if (vendas.isEmpty()) {
+        System.out.println("Nenhuma venda registrada.");
+    } else {
+        for (Vendas venda : vendas) {
+            System.out.println("Venda ID: " + venda.getId() +
+                               ", Data: " + venda.getDataVenda() +
+                               ", Valor Total: " + venda.getValorTotal() +
+                               ", ID Cliente: " + venda.getIdCliente());
+        }
+    }
+}
+
+private static void consultarCaixa(CaixaDAO caixaDAO) {
+    List<String> registros = caixaDAO.consultarRegistrosCaixa();
+    if (registros.isEmpty()) {
+        System.out.println("Nenhum registro encontrado no caixa.");
+    } else {
+        for (String registro : registros) {
+            System.out.println(registro);
+        }
+    }
+}
+
+private static void verificarEstoqueBaixo(EstoqueDAO estoqueDAO, AlertaEstoqueDAO alertaEstoqueDAO) {
+    int limiteEstoque = 10;
+    List<Estoque> estoqueBaixo = estoqueDAO.listarEstoqueBaixo(limiteEstoque);
+
+    if (estoqueBaixo.isEmpty()) {
+        System.out.println("Nenhum produto com estoque baixo.");
+    } else {
+        for (Estoque item : estoqueBaixo) {
+            String mensagem = "Estoque baixo para o produto ID " + item.getIdProduto() + 
+                              ". Quantidade atual: " + item.getQuantidade();
+            alertaEstoqueDAO.adicionarAlerta(item.getIdProduto(), mensagem);
+            System.out.println("Alerta gerado para o produto ID: " + item.getIdProduto());
+        }
+    }
+}
+}
+
