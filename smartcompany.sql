@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 20/10/2024 às 22:32
+-- Tempo de geração: 07/12/2024 às 18:53
 -- Versão do servidor: 8.3.0
 -- Versão do PHP: 8.2.18
 
@@ -81,15 +81,14 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `email` varchar(80) DEFAULT NULL,
   `telefone` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `clientes`
 --
 
 INSERT INTO `clientes` (`id`, `nome`, `email`, `telefone`) VALUES
-(1, 'Gabriel', '247579@facens.br', '15997671792'),
-(2, 'teste', 'teste@email.com', '12312312');
+(4, 'Gabriel', 'gabriel@gmail.com', '15997671792');
 
 -- --------------------------------------------------------
 
@@ -106,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `estoque` (
   PRIMARY KEY (`id`),
   KEY `id_venda` (`id_venda`),
   KEY `id_produto` (`id_produto`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `estoque`
@@ -114,7 +113,12 @@ CREATE TABLE IF NOT EXISTS `estoque` (
 
 INSERT INTO `estoque` (`id`, `id_venda`, `id_produto`, `quantidade`) VALUES
 (1, 1, 1, 37),
-(2, NULL, 9, 10);
+(2, NULL, 9, 10),
+(3, NULL, 10, 100),
+(4, NULL, 11, 100),
+(5, NULL, 12, 50),
+(6, NULL, 13, 50),
+(7, NULL, 14, 10);
 
 -- --------------------------------------------------------
 
@@ -131,16 +135,7 @@ CREATE TABLE IF NOT EXISTS `fornecedores` (
   `email` varchar(50) DEFAULT NULL,
   `cnpj` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Despejando dados para a tabela `fornecedores`
---
-
-INSERT INTO `fornecedores` (`id`, `nome`, `contato`, `telefone`, `email`, `cnpj`) VALUES
-(1, 'HortiExpress', '159999999', 'hortiExpress@gm', '159999999', ''),
-(2, 'Teste Fornec', '120398120', '1231231231', 'testeforn@email.com', ''),
-(3, 'Teste ', '321312312', '1231231231', 'TESTE@FORNEDOR.BR', '12341231');
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -184,19 +179,15 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `id_fornecedor` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_fornecedor` (`id_fornecedor`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `produtos`
 --
 
 INSERT INTO `produtos` (`id`, `nome`, `categoria`, `preco`, `quantidade_estoque`, `limite_estoque`, `data_adicao`, `id_fornecedor`) VALUES
-(1, 'Hortelã', 'vegetal', 10.00, 100, 120, '2024-09-28', 1),
-(2, 'Alface Orgânica', 'Vegetais', 3.00, 50, 100, '2024-10-06', 1),
-(3, 'Tomate Orgânico', 'Vegetais', 4.50, 75, 150, '2024-10-06', 1),
-(4, 'Cenoura Orgânica', 'Vegetais', 2.80, 60, 120, '2024-10-06', 1),
-(6, 'Alecrim', 'Vegetal', 3.00, 3, 100, '2024-10-14', 1),
-(9, 'Teste', 'teste', 10.00, 10, 1, '2024-10-20', 1);
+(13, 'Hortela', 'Hortaliça', 8.00, 50, 80, '2024-12-03', 1),
+(11, 'Alface', 'Vegetal', 10.00, 100, 150, '2024-12-03', 1);
 
 -- --------------------------------------------------------
 
