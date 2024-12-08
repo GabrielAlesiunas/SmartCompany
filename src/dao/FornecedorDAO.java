@@ -64,16 +64,16 @@ public class FornecedorDAO {
     }
 
     public void cadastrarFornecedor(Fornecedores fornecedor) {
-        String sql = "INSERT INTO fornecedores (nome, cnpj, contato, telefone, email) VALUES (?, ?, ?, ?, ?)"; // Adicionado CNPJ
+        String sql = "INSERT INTO fornecedores (nome, contato, telefone, email, cnpj) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = ConexaoDB.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, fornecedor.getNome());
-            stmt.setString(2, fornecedor.getCnpj());
-            stmt.setString(3, fornecedor.getContato());
-            stmt.setString(4, fornecedor.getTelefone());
-            stmt.setString(5, fornecedor.getEmail());
+            stmt.setString(2, fornecedor.getContato());
+            stmt.setString(3, fornecedor.getTelefone());
+            stmt.setString(4, fornecedor.getEmail());
+            stmt.setString(5, fornecedor.getCnpj());
             stmt.executeUpdate();
 
             System.out.println("Fornecedor cadastrado com sucesso!");

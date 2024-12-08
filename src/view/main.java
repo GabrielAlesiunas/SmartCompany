@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -52,8 +52,8 @@ public class Main {
                 System.out.println("10) Consultar caixa");
                 System.out.println("11) Consultar Vendas");
                 System.out.println("12) Consultar Pagamentos");
-                System.out.println("13) Consultar Estoque");
-                System.out.println("14) Alerta Estoque");
+                // System.out.println("13) Consultar Estoque");
+                // System.out.println("14) Alerta Estoque");
                 System.out.println("99) Abrir Menu Novamente");
                 System.out.println("0) Sair");
                 System.out.print("Digite sua opção: ");
@@ -111,14 +111,13 @@ public class Main {
                     listarPagamentos(pagamentoDAO);
                     menuAberto = false;
                     break;
-                case 13:
-                    consultarEstoque(estoqueDAO);
-                    menuAberto = false;
-                    break;
-                case 14:
-                	verificarEstoqueBaixo(estoqueDAO, alertaEstoqueDAO);
-                    menuAberto = false;
-                    break;
+				/*
+				 * case 13: consultarEstoque(estoqueDAO); menuAberto = false; break;
+				 */
+				/*
+				 * case 14: verificarEstoqueBaixo(estoqueDAO, alertaEstoqueDAO); menuAberto =
+				 * false; break;
+				 */
                 case 0:
                     continuar = false;
                     System.out.println("Saindo do sistema. Até logo!");
@@ -226,9 +225,6 @@ private static void cadastrarFornecedor(FornecedorDAO fornecedorDAO, Scanner sca
     System.out.print("Digite o nome do fornecedor: ");
     String nome = scanner.nextLine();
     
-    System.out.print("Digite o CNPJ do fornecedor: ");
-    String cnpj = scanner.nextLine();
-    
     System.out.print("Digite o contato do fornecedor: ");
     String contato = scanner.nextLine();
     
@@ -237,8 +233,11 @@ private static void cadastrarFornecedor(FornecedorDAO fornecedorDAO, Scanner sca
     
     System.out.print("Digite o e-mail do fornecedor: ");
     String email = scanner.nextLine();
+    
+    System.out.print("Digite o CNPJ do fornecedor: ");
+    String cnpj = scanner.nextLine();
 
-    Fornecedores fornecedor = new Fornecedores(nome, cnpj, contato, telefone, email);
+    Fornecedores fornecedor = new Fornecedores(nome, contato, telefone, email, cnpj);
     
     fornecedorDAO.cadastrarFornecedor(fornecedor);
     System.out.println("Fornecedor cadastrado com sucesso!");
@@ -286,20 +285,15 @@ private static void buscarClientePorNome(ClienteDAO clienteDAO, Scanner scanner)
     }
 }
 
-private static void consultarEstoque(EstoqueDAO estoqueDAO) {
-    List<Estoque> estoques = estoqueDAO.listarEstoque();
-    if (estoques.isEmpty()) {
-        System.out.println("Nenhum item no estoque.");
-    } else {
-        for (Estoque estoque : estoques) {
-            System.out.println("ID: " + estoque.getId() +
-                               ", ID Venda: " + estoque.getIdVenda() +
-                               ", ID Produto: " + estoque.getIdProduto() +
-                               ", Quantidade: " + estoque.getQuantidade() +
-                               ", Preço Unitário: " + estoque.getPrecoUnitario());
-        }
-    }
-}
+/*
+ * private static void consultarEstoque(EstoqueDAO estoqueDAO) { List<Estoque>
+ * estoques = estoqueDAO.listarEstoque(); if (estoques.isEmpty()) {
+ * System.out.println("Nenhum item no estoque."); } else { for (Estoque estoque
+ * : estoques) { System.out.println("ID: " + estoque.getId() + ", ID Venda: " +
+ * estoque.getIdVenda() + ", ID Produto: " + estoque.getIdProduto() +
+ * ", Quantidade: " + estoque.getQuantidade() + ", Preço Unitário: " +
+ * estoque.getPrecoUnitario()); } } }
+ */
 
 private static void listarPagamentos(PagamentosDAO pagamentoDAO) {
     List<Pagamentos> pagamentos = pagamentoDAO.listarPagamentos();
@@ -341,20 +335,19 @@ private static void consultarCaixa(CaixaDAO caixaDAO) {
     }
 }
 
-private static void verificarEstoqueBaixo(EstoqueDAO estoqueDAO, AlertaEstoqueDAO alertaEstoqueDAO) {
-    int limiteEstoque = 10;
-    List<Estoque> estoqueBaixo = estoqueDAO.listarEstoqueBaixo(limiteEstoque);
-
-    if (estoqueBaixo.isEmpty()) {
-        System.out.println("Nenhum produto com estoque baixo.");
-    } else {
-        for (Estoque item : estoqueBaixo) {
-            String mensagem = "Estoque baixo para o produto ID " + item.getIdProduto() + 
-                              ". Quantidade atual: " + item.getQuantidade();
-            alertaEstoqueDAO.adicionarAlerta(item.getIdProduto(), mensagem);
-            System.out.println("Alerta gerado para o produto ID: " + item.getIdProduto());
-        }
-    }
-}
+/*
+ * private static void verificarEstoqueBaixo(EstoqueDAO estoqueDAO,
+ * AlertaEstoqueDAO alertaEstoqueDAO) { int limiteEstoque = 10; List<Estoque>
+ * estoqueBaixo = estoqueDAO.listarEstoqueBaixo(limiteEstoque);
+ * 
+ * if (estoqueBaixo.isEmpty()) {
+ * System.out.println("Nenhum produto com estoque baixo."); } else { for
+ * (Estoque item : estoqueBaixo) { String mensagem =
+ * "Estoque baixo para o produto ID " + item.getIdProduto() +
+ * ". Quantidade atual: " + item.getQuantidade();
+ * alertaEstoqueDAO.adicionarAlerta(item.getIdProduto(), mensagem);
+ * System.out.println("Alerta gerado para o produto ID: " +
+ * item.getIdProduto()); } } }
+ */
 }
 
